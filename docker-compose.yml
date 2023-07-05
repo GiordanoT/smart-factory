@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: always
+    ports:
+      - 1883:1883
+      - 9001:9001
+    networks:
+      network:
+        ipv4_address: 172.20.0.100
+
+  sensors:
+    build: ./services/sensors
+    container_name: sensors
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      network:
+        ipv4_address: 172.20.0.101
+    depends_on:
+      - mosquitto
+
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      network:
+        ipv4_address: 172.20.0.102
+    volumes:
+      - ./influxdb/data/:/var/lib/influxdb2
+      - ./influxdb/config/:/etc/influxdb2
+
+  monitor:
+    build: ./services/monitor
+    container_name: monitor
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      network:
+        ipv4_address: 172.20.0.103
+    depends_on:
+      - mosquitto
+      - influxdb
+
+  analyzer:
+    build: ./services/analyzer
+    container_name: analyzer
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      network:
+        ipv4_address: 172.20.0.104
+    depends_on:
+      - influxdb
+      - planner
+
+  planner:
+    build: ./services/planner
+    container_name: planner
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - 5001:5001
+    networks:
+      network:
+        ipv4_address: 172.20.0.105
+    depends_on:
+      - executor
+
+  executor:
+    build: ./services/executor
+    container_name: executor
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - 5002:5002
+    networks:
+      network:
+        ipv4_address: 172.20.0.106
+    depends_on:
+      - mosquitto
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - ./grafana:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+    environment:
+      - GF_SERVER_ROOT_URL=http://172.20.0.107:3000
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      network:
+        ipv4_address: 172.20.0.107
+    depends_on:
+      - influxdb
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  mosquitto:
+  influxdb:
+  grafana:

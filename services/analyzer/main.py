@@ -6,7 +6,7 @@ from components.Room import Room
 from components.Statistics import Statistics
 from info.Url import Url
 
-REFRESHING_RATE = 15
+REFRESHING_RATE = 30
 
 
 def main():

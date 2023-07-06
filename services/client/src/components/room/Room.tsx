@@ -1,10 +1,10 @@
 import React from 'react';
-import Sensor from "../data/Sensor";
 import {useStateIfMounted} from "use-state-if-mounted";
 import Actuator from "../data/Actuator";
 import MySvg from "../../svg/MySvg";
+import GrafanaSensor from "../data/GrafanaSensor";
 
-interface IProps {room: string}
+interface IProps {room: 'A'|'B'|'C'}
 function Room(props: IProps) {
     const room = props.room;
     const measurements = ['Movement', 'Temperature', 'Air'];
@@ -24,21 +24,21 @@ function Room(props: IProps) {
             <hr />
             {(measurement === 'movement') && <>
                 <div className={'d-flex'}>
-                    <Sensor room={room} measurement={'movement'} />
+                    <GrafanaSensor room={room} measurement={'movement'} />
                     <Actuator room={room} measurement={'locker'} />
                     <Actuator room={room} measurement={'alarm'} />
                 </div>
             </>}
             {(measurement === 'temperature') && <>
                 <div className={'d-flex'}>
-                    <Sensor room={room} measurement={'temperature'} />
+                    <GrafanaSensor room={room} measurement={'temperature'} />
                     <Actuator room={room} measurement={'hot_conditioner'} />
                     <Actuator room={room} measurement={'cool_conditioner'} />
                 </div>
             </>}
             {(measurement === 'air') && <>
                 <div className={'d-flex'}>
-                    <Sensor room={room} measurement={'air'} />
+                    <GrafanaSensor room={room} measurement={'air'} />
                     <Actuator room={room} measurement={'fan'} />
                 </div>
             </>}

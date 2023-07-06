@@ -2,10 +2,10 @@ import React from 'react';
 import Room from "./room/Room";
 import './index.scss';
 import {useStateIfMounted} from "use-state-if-mounted";
-
+type TRoom = 'A'|'B'|'C';
 function App() {
-  const [room, setRoom] = useStateIfMounted('A');
-  const rooms = ['A', 'B', 'C'];
+  const [room, setRoom] = useStateIfMounted<TRoom>('A');
+  const rooms: TRoom[] = ['A', 'B', 'C'];
   return<>
     <div className={"leftbar border-right border-default shadow"}>
       <div className={"list"}>

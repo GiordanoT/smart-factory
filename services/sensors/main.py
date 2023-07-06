@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 from components.room.Room import Room
 from info.Url import Url
 
-DATA_SIMULATION_RATE = 15
+DATA_SIMULATION_RATE = 30
 ROOMS = ['A', 'B', 'C']
 
 DATA = {}

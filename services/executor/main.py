@@ -1,14 +1,16 @@
 import random
-
 import paho.mqtt.client as mqtt
 from flask import Flask, json, request
+from flask_cors import CORS, cross_origin
 import time
 from info.Url import Url
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/executor', methods=['POST'])
+@cross_origin(origin='*')
 def index():
 
     client = mqtt.Client(f'ID_EXECUTOR_{random.randint(0, 99999)}')

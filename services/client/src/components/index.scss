@@ -1,0 +1,58 @@
+$text: white;
+$radius: 0.5em;
+
+.rounded { border-radius: $radius !important; }
+.complete-rounded { border-radius: 100px; }
+.border-default { border: 1px solid rgba(0, 0, 0, 0.2); }
+.border-top-default { border-top: 1px solid rgba(0, 0, 0, 0.2); border-bottom: none !important; }
+.bold { font-weight: bold !important; }
+
+.bg-first { background-color: indigo; color: $text; }
+.card {
+  padding: 1rem 2rem;
+  background-color: white;
+  width:  25%; height: min-content;
+  text-align: center;
+  border-radius: $radius !important;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  position: absolute !important;
+  left: 14% !important;
+  margin-top: 2em !important;
+}
+
+.y-middle { vertical-align: middle; height: min-content; }
+
+.leftbar {
+  position: absolute;
+  display: block;
+  height: 100%;
+  background-color: indigo;
+  width: 12%;
+  z-index: 1;
+}
+
+.leftbar > .list > .item {
+  text-align: center;
+  padding: 5px;
+  position: relative;
+  z-index: 1;
+  color: whitesmoke;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: rebeccapurple;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+
+

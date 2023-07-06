@@ -111,6 +111,19 @@ services:
     depends_on:
       - influxdb
 
+  client:
+    build: ./services/client
+    container_name: client
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      network:
+        ipv4_address: 172.20.0.108
+    depends_on:
+      - influxdb
+      - executor
+
 networks:
   network:
     driver: bridge

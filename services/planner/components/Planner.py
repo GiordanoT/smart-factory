@@ -34,9 +34,11 @@ class Planner:
         if code == -1:
             print(f'WARNING({room}): Cool conditioner should be activate!!')
             requests.post(Url.executor, json={'room': room, 'actuator': 'cool_conditioner', 'value': 1})
+            requests.post(Url.executor, json={'room': room, 'actuator': 'hot_conditioner', 'value': 0})
         if code == 1:
             print(f'WARNING({room}): Hot conditioner should be activate!!')
             requests.post(Url.executor, json={'room': room, 'actuator': 'hot_conditioner', 'value': 1})
+            requests.post(Url.executor, json={'room': room, 'actuator': 'cool_conditioner', 'value': 0})
         if code == 0:
             print(f'INFO({room}): Temperature measurement is okay!!')
             requests.post(Url.executor, json={'room': room, 'actuator': 'cool_conditioner', 'value': 0})

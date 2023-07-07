@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import {InfluxDB} from '@influxdata/influxdb-client';
 import {DB, InfluxData, Point} from '../../influxdb/DB';
 import {useStateIfMounted} from 'use-state-if-mounted';
-import LineChart from "../../charts/LineChart";
 import {useInterval} from 'usehooks-ts';
-import {Line} from "react-chartjs-2";
 import MySvg from "../../svg/MySvg";
 import Api from "../../api/Api";
+import PlaySVG from '../../static/svg/play.svg';
+import StopSVG from '../../static/svg/stop.svg';
 
 interface IProps {measurement: string; room: string}
 function Actuator(props: IProps) {
@@ -14,6 +14,7 @@ function Actuator(props: IProps) {
     const room = props.room;
 
     const [data, setData] = useStateIfMounted(0);
+    const [disabled, setDisabled] = useStateIfMounted(false);
 
     const load = async() => {
         const res: InfluxData[] = [];
@@ -39,9 +40,11 @@ function Actuator(props: IProps) {
     }
 
     const click = async(value: number) => {
+        setDisabled(true);
         await Api.post(room, measurement, value);
         await new Promise( resolve => setTimeout(resolve, 5 * 1000));
         await load();
+        setDisabled(false);
     }
 
     useEffect(() => {load().then()}, [props.room]);
@@ -59,16 +62,28 @@ function Actuator(props: IProps) {
         {(data) ?
             <div>
                 Status: <label><b className={"text-success"}>ON</b></label>
-                <br />
-                <button className={'mt-3 btn btn-primary'} onClick={() => click(0)}>
-                    Force Deactivation
+                <hr />
+                <div>
+                    <i className={'bi bi-exclamation-triangle-fill'} />
+                    <label className={'ms-2'}>Manual Mode</label>
+                </div>
+                <button disabled={disabled} className={'mt-2 btn'} onClick={() => click(0)}>
+                    <div className={"d-block mx-auto"}>
+                        <img src={StopSVG} width={40} />
+                    </div>
                 </button>
             </div>:
             <div>
                 Status: <label><b className={"text-danger"}>OFF</b></label>
-                <br />
-                <button className={'mt-3 btn btn-primary'} onClick={() => click(1)}>
-                    Force Activation
+                <hr />
+                <div>
+                    <i className={'bi bi-exclamation-triangle-fill'} />
+                    <label className={'ms-2'}>Manual Mode</label>
+                </div>
+                <button disabled={disabled} className={'mt-2 btn'} onClick={() => click(1)}>
+                    <div className={"d-block mx-auto"}>
+                        <img src={PlaySVG} width={40} />
+                    </div>
                 </button>
             </div>
         }

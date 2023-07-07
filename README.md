@@ -5,5 +5,4 @@ The Smart Factory project showcases the potential of IoT and self-adaptive syste
 Instructions:
   - Clone the repository: https://github.com/GiordanoT/smart-factory.git
   - Run: docker compose up -d
-  - Login into Grafana* (admin:admin) and then go to dashboards.
-*http://localhost:3000
+  - Go to: http://localhost:3001

@@ -13,3 +13,5 @@ Customizations (edit .env file):
   - MAX_TEMPERATURE ===> Value related to the activation of Cool Conditioner
   - MIN_TEMPERATURE ===> Value related to the activation of Hot Conditioner
   - MAX_AIR ===> Value related to the activation of Fan
+  * Optimal values ​​will be calculated automatically based on these values.
+

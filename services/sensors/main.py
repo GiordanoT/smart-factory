@@ -1,10 +1,13 @@
 import time
+import os
 import paho.mqtt.client as mqtt
 from components.room.Room import Room
 from info.Url import Url
+from dotenv import load_dotenv
 
+load_dotenv()
 DATA_SIMULATION_RATE = 60
-ROOMS = ['A', 'B', 'C']
+ROOMS = os.getenv('REACT_APP_ROOMS').split(',')
 
 DATA = {}
 for room in ROOMS:

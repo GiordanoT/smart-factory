@@ -5,7 +5,9 @@ from components.Database import Database
 from components.Room import Room
 from components.Statistics import Statistics
 from info.Url import Url
+from dotenv import load_dotenv
 
+load_dotenv()
 REFRESHING_RATE = 30
 
 

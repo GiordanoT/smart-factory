@@ -12,9 +12,10 @@ class Room:
     def default_value(field: str, room: str):
         if field != 'temperature' and field != 'air': return 0
         data = {'temperature': 0, 'air': 0}
-        if room == 'A': data = {'temperature': 0.63, 'air': 0.21}
-        if room == 'B': data = {'temperature': 1.63, 'air': 0.51}
-        if room == 'C': data = {'temperature': 1.03, 'air': 1.01}
+        n = random.randint(1, 3)
+        if n == 1: data = {'temperature': 0.63, 'air': 0.21}
+        if n == 2: data = {'temperature': 1.63, 'air': 0.51}
+        if n == 3: data = {'temperature': 1.03, 'air': 1.01}
         return data[field]
 
     @staticmethod

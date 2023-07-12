@@ -20,8 +20,8 @@ function LineChart(props: IProps) {
             {
                 label: props.label,
                 data: props.data.map(point => point.y),
-                borderColor: 'rgb(91, 225, 44)',
-                backgroundColor: 'rgba(91, 225, 44, 0.5)',
+                borderColor: 'rgb(81,0,140)',
+                backgroundColor: 'rgb(75,0,130)',
             }
         ],
     };

@@ -5,4 +5,5 @@ RUN pip3 install influxdb-client
 RUN pip3 install numpy
 RUN pip3 install scipy
 RUN pip3 install requests
+RUN pip3 install python-dotenv 
 CMD python3 main.py

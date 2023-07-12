@@ -9,7 +9,7 @@ Instructions:
 
 Customizations (edit .env file):
   - REACT_APP_ROOMS ===> System's rooms
-  - MAX_MOVEMENT ===> Value related to the activation of Alarm
+  - MAX_MOVEMENT ===> Value related to the activation of Alarm when Locker is ON
   - MAX_TEMPERATURE ===> Value related to the activation of Cool Conditioner
   - MIN_TEMPERATURE ===> Value related to the activation of Hot Conditioner
   - MAX_AIR ===> Value related to the activation of Fan

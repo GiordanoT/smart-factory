@@ -6,3 +6,10 @@ Instructions:
   - Clone the repository: https://github.com/GiordanoT/smart-factory.git
   - Run: docker compose up -d
   - Go to: http://localhost:3001
+
+Customizations (edit .env file):
+  - REACT_APP_ROOMS ===> System's rooms
+  - MAX_MOVEMENT ===> Value related to the activation of Alarm
+  - MAX_TEMPERATURE ===> Value related to the activation of Cool Conditioner
+  - MIN_TEMPERATURE ===> Value related to the activation of Hot Conditioner
+  - MAX_AIR ===> Value related to the activation of Fan
